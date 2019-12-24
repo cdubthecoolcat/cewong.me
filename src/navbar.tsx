@@ -65,4 +65,4 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   }
 }
 
-export default styles.withStyles(useStyles, {withTheme: true})(Navbar);
+export default styles.withStyles(useStyles)(Navbar);
