@@ -1,8 +1,7 @@
 import React from 'react';
 import * as styles from '@material-ui/core/styles';
 import {List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer} from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import FolderIcon from '@material-ui/icons/Folder';
 
 export default function SwipeableTempDrawer(props: any) {
   const drawerStyle = styles.makeStyles({
@@ -16,17 +15,14 @@ export default function SwipeableTempDrawer(props: any) {
     <div
       className={classes.list}
       role="presentation"
-      onClick={props.toggleDrawer(false)}
-      onKeyDown={props.toggleDrawer(false)}
+      onClick={e => props.toggleDrawer(false, e)}
+      onKeyDown={e => props.toggleDrawer(false, e)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-
-        ))}
+        <ListItem button>
+          <ListItemIcon>{<FolderIcon />}</ListItemIcon>
+          <ListItemText primary="Projects" />
+        </ListItem>
       </List>
     </div>
   );
@@ -35,8 +31,8 @@ export default function SwipeableTempDrawer(props: any) {
     <div>
       <SwipeableDrawer
         open={props.show}
-        onClose={props.toggleDrawer(false)}
-        onOpen={props.toggleDrawer(true)}
+        onClose={e => props.toggleDrawer(false, e)}
+        onOpen={e => props.toggleDrawer(true, e)}
       >
         {sideList()}
       </SwipeableDrawer>
