@@ -13,7 +13,9 @@ export default function App() {
   const toggleDarkMode = () => {
     const newDark = !darkMode;
     setDarkMode(newDark);
-    setCookie('darkMode', newDark);
+    setCookie('darkMode', newDark, {
+      maxAge: 86400
+    });
   }
 
   React.useEffect(() => {
