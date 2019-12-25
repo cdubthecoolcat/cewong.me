@@ -3,6 +3,10 @@ import * as styles from '@material-ui/core/styles';
 import {List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer} from '@material-ui/core';
 import FolderIcon from '@material-ui/icons/Folder';
 
+function ListItemLink(props: any) {
+  return <ListItem button component="a" {...props} />;
+}
+
 export default function SwipeableTempDrawer(props: any) {
   const drawerStyle = styles.makeStyles({
     list: {
@@ -19,10 +23,10 @@ export default function SwipeableTempDrawer(props: any) {
       onKeyDown={e => props.toggleDrawer(false, e)}
     >
       <List>
-        <ListItem button>
+        <ListItemLink href="/projects">
           <ListItemIcon>{<FolderIcon />}</ListItemIcon>
           <ListItemText primary="Projects" />
-        </ListItem>
+        </ListItemLink>
       </List>
     </div>
   );

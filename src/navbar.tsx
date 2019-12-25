@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import * as styles from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Switch } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import Brightness4 from '@material-ui/icons/Brightness4';
+import BrightnessHigh from '@material-ui/icons/BrightnessHigh';
 import SwipeableTempDrawer from './drawer';
 
 const useStyles = (theme: styles.Theme) => ({
@@ -18,6 +20,8 @@ const useStyles = (theme: styles.Theme) => ({
 
 interface NavbarProps {
   classes: any;
+  toggle: any;
+  isDark: boolean;
 }
 
 interface NavbarState {
@@ -57,6 +61,11 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             <Typography variant="h6" className={classes.title}>
               Connor Wong
             </Typography>
+            {!this.props.isDark ? <Brightness4/> : <BrightnessHigh/>}
+            <Switch
+              checked={this.props.isDark}
+              onChange={this.props.toggle}
+            />
           </Toolbar>
         </AppBar>
         <SwipeableTempDrawer toggleDrawer={this.toggleDrawer} show={this.state.drawerShow}/>
