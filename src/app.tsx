@@ -1,8 +1,11 @@
 import React from 'react';
 import Navbar from './navbar';
 import { ThemeProvider, CssBaseline, createMuiTheme, useMediaQuery } from '@material-ui/core';
-import {blue} from '@material-ui/core/colors';
+import { blue } from '@material-ui/core/colors';
 import { useCookies } from 'react-cookie';
+import { Switch, Route } from 'react-router';
+import Projects from './projects/projects';
+import Home from './home/home';
 
 export default function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -39,7 +42,20 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navbar toggle={toggleDarkMode} isDark={darkMode} />
+      <Navbar
+        toggle={toggleDarkMode}
+        isDark={darkMode}
+      />
+      <Switch>
+        <Route
+          path='/projects'
+          component={Projects}
+        />
+        <Route
+          path='/'
+          component={Home}
+        />
+      </Switch>
     </ThemeProvider>
   );
 }

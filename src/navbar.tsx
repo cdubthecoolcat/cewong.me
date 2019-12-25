@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import * as styles from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Switch } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -28,7 +28,7 @@ interface NavbarState {
   drawerShow: boolean;
 }
 
-class Navbar extends Component<NavbarProps, NavbarState> {
+class Navbar extends React.Component<NavbarProps, NavbarState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -55,10 +55,17 @@ class Navbar extends Component<NavbarProps, NavbarState> {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={e => {this.toggleDrawer(true, e)}}>
+            <IconButton 
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={e => {this.toggleDrawer(true, e)}}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
+            <Typography
+              variant="h6"
+              className={classes.title}>
               Connor Wong
             </Typography>
             {!this.props.isDark ? <Brightness4/> : <BrightnessHigh/>}
@@ -68,7 +75,10 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             />
           </Toolbar>
         </AppBar>
-        <SwipeableTempDrawer toggleDrawer={this.toggleDrawer} show={this.state.drawerShow}/>
+        <SwipeableTempDrawer
+          toggleDrawer={this.toggleDrawer}
+          show={this.state.drawerShow}
+        />
       </div>
     );
   }
