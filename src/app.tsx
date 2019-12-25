@@ -17,7 +17,7 @@ export default function App() {
   }
 
   React.useEffect(() => {
-    if (cookies.darkMode !== null) {
+    if (cookies.darkMode !== undefined) {
       setDarkMode(JSON.parse(cookies.darkMode));
     } else {
       setDarkMode(preferDarkMode);
