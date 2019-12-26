@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from './navbar/Navbar';
 import { ThemeProvider, CssBaseline, createMuiTheme, useMediaQuery } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { useCookies } from 'react-cookie';
@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router';
 import Projects from './projects/projects';
 import Home from './home/home';
 
-export default function App(props: any) {
+function App(props: any) {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [cookies, setCookie] = useCookies(['darkMode']);
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
@@ -60,3 +60,5 @@ export default function App(props: any) {
     </ThemeProvider>
   );
 }
+
+export default App;

@@ -1,8 +1,11 @@
 import React from "react";
 import * as styles from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, Switch } from '@material-ui/core';
-import { Menu, GitHub, LinkedIn, Brightness4, BrightnessHigh } from '@material-ui/icons';
-import SwipeableTempDrawer from './drawer';
+import { AppBar, Toolbar, IconButton, Typography, Switch, useMediaQuery } from '@material-ui/core';
+import { GitHub, LinkedIn, Brightness4, BrightnessHigh, MoreVert } from '@material-ui/icons';
+import MenuIcon from '@material-ui/icons/Menu';
+import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
+import SocialMenu from './SocialMenu';
+import SocialMenuItem, {SocialMenuItemProps} from "./SocialMenuItem";
 
 const useStyles = styles.makeStyles((theme: styles.Theme) => {
   return styles.createStyles({
@@ -18,31 +21,23 @@ const useStyles = styles.makeStyles((theme: styles.Theme) => {
   });
 });
 
-interface SocialMenuItemProps {
-  icon: any;
-  link: string;
-}
-
-function SocialMenuItem(props: SocialMenuItemProps) {
-  const Icon = props.icon;
-  return (
-    <IconButton
-      href={props.link}
-      color="inherit">
-      <Icon />
-    </IconButton>
-  )
-}
-
 interface NavbarProps {
   classes: any;
   toggle: any;
   isDark: boolean;
 }
 
-export default function Navbar(props: NavbarProps) {
+function Navbar(props: NavbarProps) {
   const [drawerState, setDrawerState] = React.useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const classes = useStyles();
+  const theme = styles.useTheme();
+  const mobileWidth = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const openMenu = (event: React.SyntheticEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const toggleDrawer = (event: React.SyntheticEvent) => {
     if (event && event.type === 'keydown' &&
@@ -51,12 +46,22 @@ export default function Navbar(props: NavbarProps) {
     }
 
     setDrawerState(!drawerState);
-  }
-  
+  };
+
   const items: SocialMenuItemProps[] = [
     { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
     { icon: LinkedIn, link: '' }
   ];
+
+  const itemElements = items.map((props: SocialMenuItemProps, index: number) => (
+    <SocialMenuItem {...props} key={index} />
+  ));
+
+  const menuButton = (
+    <IconButton onClick={openMenu} color="inherit">
+      <MoreVert />
+    </IconButton>
+  );
 
   const toolBar = (
     <AppBar position="static">
@@ -67,7 +72,7 @@ export default function Navbar(props: NavbarProps) {
           color="inherit"
           aria-label="menu"
           onClick={toggleDrawer}>
-          <Menu />
+          <MenuIcon />
         </IconButton>
         <Typography
           variant="h6"
@@ -79,10 +84,9 @@ export default function Navbar(props: NavbarProps) {
           checked={props.isDark}
           onChange={props.toggle}
         />
-        {items.map((props: SocialMenuItemProps, index: number) => (
-          <SocialMenuItem {...props} key={index} />
-        ))}
+        {mobileWidth ? menuButton : itemElements}
       </Toolbar>
+      <SocialMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} children={itemElements} />
     </AppBar>
   )
 
@@ -96,3 +100,5 @@ export default function Navbar(props: NavbarProps) {
     </div>
   );
 }
+
+export default Navbar;
