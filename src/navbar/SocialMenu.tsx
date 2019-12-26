@@ -14,6 +14,6 @@ export default function SocialMenu(props: SocialMenuProps) {
       keepMounted
       open={Boolean(props.anchorEl)}
       onClose={() => props.setAnchorEl(null)}
-      {...props} />
+    />
   )
 }

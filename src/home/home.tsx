@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => {
   });
 });
 
-export default function Home() {
+function Home() {
   const classes = useStyles();
 
   return (
@@ -41,3 +41,5 @@ export default function Home() {
     </Grid>
   )
 }
+
+export default Home;
