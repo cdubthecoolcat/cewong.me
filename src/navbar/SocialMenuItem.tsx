@@ -6,15 +6,17 @@ export interface SocialMenuItemProps {
   link: string;
 }
 
-function SocialMenuItem(props: SocialMenuItemProps) {
-  const Icon = props.icon;
-  return (
-    <IconButton
-      href={props.link}
-      color='inherit'>
-      <Icon />
-    </IconButton>
-  )
+class SocialMenuItem extends React.Component<SocialMenuItemProps> {
+  render() {
+    const Icon = this.props.icon;
+    return (
+      <IconButton
+        href={this.props.link}
+        color='inherit'>
+        <Icon />
+      </IconButton>
+    )
+  }
 }
 
 export default SocialMenuItem;

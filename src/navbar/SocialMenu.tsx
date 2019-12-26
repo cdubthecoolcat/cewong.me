@@ -7,13 +7,15 @@ interface SocialMenuProps {
   children: React.ReactElement[];
 }
 
-export default function SocialMenu(props: SocialMenuProps) {
+function SocialMenu(props: SocialMenuProps) {
   return (
     <Menu
       anchorEl={props.anchorEl}
       keepMounted
       open={Boolean(props.anchorEl)}
       onClose={() => props.setAnchorEl(null)}
-    />
+      children={props.children} />
   )
 }
+
+export default SocialMenu;

@@ -86,7 +86,11 @@ function Navbar(props: NavbarProps) {
         />
         {mobileWidth ? menuButton : itemElements}
       </Toolbar>
-      <SocialMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} children={itemElements} />
+      <SocialMenu
+        anchorEl={anchorEl}
+        setAnchorEl={setAnchorEl}
+        children={itemElements}
+      />
     </AppBar>
   )
 
