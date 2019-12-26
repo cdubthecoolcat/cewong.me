@@ -1,22 +1,38 @@
 import React from "react";
 import * as styles from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Switch } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import Brightness4 from '@material-ui/icons/Brightness4';
-import BrightnessHigh from '@material-ui/icons/BrightnessHigh';
+import { Menu, GitHub, LinkedIn, Brightness4, BrightnessHigh } from '@material-ui/icons';
 import SwipeableTempDrawer from './drawer';
 
-const useStyles = (theme: styles.Theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
+const useStyles = styles.makeStyles((theme: styles.Theme) => {
+  return styles.createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  });
 });
+
+interface SocialMenuItemProps {
+  icon: any;
+  link: string;
+}
+
+function SocialMenuItem(props: SocialMenuItemProps) {
+  const Icon = props.icon;
+  return (
+    <IconButton
+      href={props.link}
+      color="inherit">
+      <Icon />
+    </IconButton>
+  )
+}
 
 interface NavbarProps {
   classes: any;
@@ -24,64 +40,59 @@ interface NavbarProps {
   isDark: boolean;
 }
 
-interface NavbarState {
-  drawerShow: boolean;
-}
+export default function Navbar(props: NavbarProps) {
+  const [drawerState, setDrawerState] = React.useState<boolean>(false);
+  const classes = useStyles();
 
-class Navbar extends React.Component<NavbarProps, NavbarState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      drawerShow: false,
-    };
-
-    this.toggleDrawer = this.toggleDrawer.bind(this);
-  }
-
-
-  toggleDrawer(open: boolean, event: any) {
+  const toggleDrawer = (event: React.SyntheticEvent) => {
     if (event && event.type === 'keydown' &&
         ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
     }
 
-    this.setState({ drawerShow: open  });
+    setDrawerState(!drawerState);
   }
+  
+  const items: SocialMenuItemProps[] = [
+    { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
+    { icon: LinkedIn, link: '' }
+  ];
 
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton 
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={e => {this.toggleDrawer(true, e)}}>
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              className={classes.title}>
-              Connor Wong
-            </Typography>
-            {!this.props.isDark ? <Brightness4/> : <BrightnessHigh/>}
-            <Switch
-              checked={this.props.isDark}
-              onChange={this.props.toggle}
-            />
-          </Toolbar>
-        </AppBar>
-        <SwipeableTempDrawer
-          toggleDrawer={this.toggleDrawer}
-          show={this.state.drawerShow}
+  const toolBar = (
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton 
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="menu"
+          onClick={toggleDrawer}>
+          <Menu />
+        </IconButton>
+        <Typography
+          variant="h6"
+          className={classes.title}>
+          Connor Wong
+        </Typography>
+        {!props.isDark ? <Brightness4/> : <BrightnessHigh/>}
+        <Switch
+          checked={props.isDark}
+          onChange={props.toggle}
         />
-      </div>
-    );
-  }
-}
+        {items.map((props: SocialMenuItemProps, index: number) => (
+          <SocialMenuItem {...props} key={index} />
+        ))}
+      </Toolbar>
+    </AppBar>
+  )
 
-export default styles.withStyles(useStyles)(Navbar);
+  return (
+    <div className={classes.root}>
+      {toolBar}
+      <SwipeableTempDrawer
+        toggleDrawer={toggleDrawer}
+        show={drawerState}
+      />
+    </div>
+  );
+}

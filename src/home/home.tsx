@@ -1,7 +1,44 @@
 import React from 'react';
+import { Grow, Container, makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
+import me from './images/me.png';
 
-export default function Home(props: any) {
+const useStyles = makeStyles((theme: Theme) => {
+  return createStyles({
+    main: {
+      textAlign: "center",
+    },
+    container: {
+      margin: 50,
+      padding: 50,
+    },
+    meImg: {
+      width: '20%',
+    }
+  });
+});
+
+export default function Home() {
+  const classes = useStyles();
+
   return (
-    <h1>This is home</h1>
+    <Container maxWidth="xl" className={classes.main}>
+      <Grow
+        in={true}
+        timeout={1000}
+        style={{
+          transformOrigin: 'center center'
+        }}> 
+        <div className={classes.container}>
+          <Typography variant="h2">
+            Welcome!
+          </Typography>
+          <img
+            src={me}
+            alt="me"
+            className={classes.meImg}
+          />
+        </div>
+      </Grow>
+    </Container>
   )
 }

@@ -1,50 +1,57 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import * as styles from '@material-ui/core/styles';
 import { List, ListItem, ListItemIcon, ListItemText, SwipeableDrawer } from '@material-ui/core';
-import FolderIcon from '@material-ui/icons/Folder';
-import HomeIcon from '@material-ui/icons/Home';
+import { Folder, Home } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
-interface MenuItem {
+interface ListItemLinkProps {
   name: string;
-  icon: ReactElement<any, string>;
+  icon?: any;
   link: string;
 }
 
-const items: MenuItem[] = [
-  { name: 'Home', icon: <HomeIcon />, link: '/' },
-  { name: 'Projects', icon: <FolderIcon />, link: '/projects' },
-]
-
-function ListItemLink(props: any) {
-  return <ListItem button component={Link} {...props} />
+function ListItemLink(props: ListItemLinkProps) {
+  const Icon = props.icon;
+  return (
+    <ListItem button component={Link} to={props.link}>
+      {props.icon ?
+        <ListItemIcon>
+          <Icon />
+        </ListItemIcon> :
+          null
+      }
+      <ListItemText primary={props.name} />
+    </ListItem>
+  );
 }
 
-export default function SwipeableTempDrawer(props: any) {
-  console.log(<HomeIcon />);
+interface SwipeableTempDrawerProps {
+  show: boolean;
+  toggleDrawer: Function;
+}
+
+export default function SwipeableTempDrawer(props: SwipeableTempDrawerProps) {
   const drawerStyle = styles.makeStyles({
     list: {
       width: 250,
     },
   });
-
   const classes = drawerStyle();
-  const sideList = () => (
+
+  const items: ListItemLinkProps[] = [
+    { name: 'Home', icon: Home, link: '/' },
+    { name: 'Projects', icon: Folder, link: '/projects' }
+  ]
+
+  const sideList = (
     <div
       className={classes.list}
       role="presentation"
       onClick={e => props.toggleDrawer(false, e)}
       onKeyDown={e => props.toggleDrawer(false, e)}>
       <List>
-        {items.map((item: MenuItem, index: number) => (
-          <ListItemLink
-            to={item.link}
-            key={index}>
-            <ListItemIcon>
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText primary={item.name} />
-          </ListItemLink>
+        {items.map((props: ListItemLinkProps) => (
+          <ListItemLink {...props} key={props.name} />
         ))}
       </List>
     </div>
@@ -56,7 +63,7 @@ export default function SwipeableTempDrawer(props: any) {
         open={props.show}
         onClose={e => props.toggleDrawer(false, e)}
         onOpen={e => props.toggleDrawer(true, e)}>
-        {sideList()}
+        {sideList}
       </SwipeableDrawer>
     </div>
   );
