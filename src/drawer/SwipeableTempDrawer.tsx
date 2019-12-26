@@ -25,7 +25,7 @@ function SwipeableTempDrawer(props: SwipeableTempDrawerProps) {
   const sideList = (
     <div
       className={classes.list}
-      role="presentation"
+      role='presentation'
       onClick={e => props.toggleDrawer(false, e)}
       onKeyDown={e => props.toggleDrawer(false, e)}>
       <List>

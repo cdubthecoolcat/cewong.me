@@ -11,7 +11,7 @@ function SocialMenuItem(props: SocialMenuItemProps) {
   return (
     <IconButton
       href={props.link}
-      color="inherit">
+      color='inherit'>
       <Icon />
     </IconButton>
   )

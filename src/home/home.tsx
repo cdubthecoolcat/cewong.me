@@ -5,7 +5,7 @@ import me from './images/me.png';
 const useStyles = makeStyles(() => {
   return createStyles({
     main: {
-      textAlign: "center",
+      textAlign: 'center',
       marginTop: 100
     },
     meImg: {
@@ -27,12 +27,12 @@ export default function Home() {
             transformOrigin: 'center center'
           }}> 
           <div>
-            <Typography variant="h2">
+            <Typography variant='h2'>
               Welcome!
             </Typography>
             <img
               src={me}
-              alt="me"
+              alt='me'
               className={classes.meImg}
             />
           </div>

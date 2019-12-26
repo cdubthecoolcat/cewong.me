@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import * as styles from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, Switch, useMediaQuery } from '@material-ui/core';
 import { GitHub, LinkedIn, Brightness4, BrightnessHigh, MoreVert } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
 import SocialMenu from './SocialMenu';
-import SocialMenuItem, {SocialMenuItemProps} from "./SocialMenuItem";
+import SocialMenuItem, {SocialMenuItemProps} from './SocialMenuItem';
 
 const useStyles = styles.makeStyles((theme: styles.Theme) => {
   return styles.createStyles({
@@ -58,24 +58,24 @@ function Navbar(props: NavbarProps) {
   ));
 
   const menuButton = (
-    <IconButton onClick={openMenu} color="inherit">
+    <IconButton onClick={openMenu} color='inherit'>
       <MoreVert />
     </IconButton>
   );
 
   const toolBar = (
-    <AppBar position="static">
+    <AppBar position='static'>
       <Toolbar>
         <IconButton 
-          edge="start"
+          edge='start'
           className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
+          color='inherit'
+          aria-label='menu'
           onClick={toggleDrawer}>
           <MenuIcon />
         </IconButton>
         <Typography
-          variant="h6"
+          variant='h6'
           className={classes.title}>
           Connor Wong
         </Typography>
