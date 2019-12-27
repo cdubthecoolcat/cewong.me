@@ -2,11 +2,9 @@ import { createMuiTheme, CssBaseline, ThemeProvider, useMediaQuery } from '@mate
 import { blue } from '@material-ui/core/colors';
 import React from 'react';
 import { useCookies } from 'react-cookie';
-import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import Home from './home/home';
 import Navbar from './navbar/Navbar';
-import Projects from './projects/projects';
+import Routes from './Routes';
 
 function App(props: any) {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -49,16 +47,7 @@ function App(props: any) {
           isDark={darkMode}
           {...props}
         />
-        <Switch>
-          <Route
-            path='/projects'
-            component={Projects}
-          />
-          <Route
-            path='/'
-            component={Home}
-          />
-        </Switch>
+        <Routes />
       </BrowserRouter>
     </ThemeProvider>
   );

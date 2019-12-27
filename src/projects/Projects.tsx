@@ -1,6 +1,10 @@
 import React from 'react';
 
-function Projects(props: any) {
+function Projects() {
+  React.useEffect(() => {
+    document.title = 'Projects';
+  });
+
   return (
     <h1>This is projects</h1>
   )

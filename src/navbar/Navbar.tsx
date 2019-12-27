@@ -1,8 +1,9 @@
 import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
-import styles, { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
+import styles, { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Brightness4, BrightnessHigh, GitHub, LinkedIn, MoreVert } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
 import SocialMenu from './SocialMenu';
 import SocialMenuItem, { SocialMenuItemProps } from './SocialMenuItem';
@@ -18,6 +19,10 @@ const useStyles = makeStyles((theme: styles.Theme) => {
     title: {
       flexGrow: 1,
     },
+    titleLink: {
+      textDecoration: 'none',
+      color: 'white'
+    }
   });
 });
 
@@ -28,13 +33,16 @@ interface NavbarProps {
 }
 
 function Navbar(props: NavbarProps) {
+  // States
   const [drawerState, setDrawerState] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
+  // Styles
   const classes = useStyles();
   const theme = useTheme();
   const mobileWidth = useMediaQuery(theme.breakpoints.down('xs'));
 
+  // Functions
   const openMenu = (event: React.SyntheticEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -48,6 +56,7 @@ function Navbar(props: NavbarProps) {
     setDrawerState(!drawerState);
   };
 
+  // Data
   const items: SocialMenuItemProps[] = [
     { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
     { icon: LinkedIn, link: '' }
@@ -77,9 +86,11 @@ function Navbar(props: NavbarProps) {
         <Typography
           variant='h6'
           className={classes.title}>
-          Connor Wong
+          <Link to='/' className={classes.titleLink}>
+            Connor Wong
+          </Link>
         </Typography>
-        {!props.isDark ? <Brightness4/> : <BrightnessHigh/>}
+        {!props.isDark ? <Brightness4 /> : <BrightnessHigh />}
         <Switch
           checked={props.isDark}
           onChange={props.toggle}
