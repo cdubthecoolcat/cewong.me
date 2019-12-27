@@ -10,9 +10,6 @@ import SocialMenuItem, { SocialMenuItemProps } from './SocialMenuItem';
 
 const useStyles = makeStyles((theme: styles.Theme) => {
   return createStyles({
-    root: {
-      flexGrow: 1,
-    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -27,36 +24,26 @@ const useStyles = makeStyles((theme: styles.Theme) => {
 });
 
 interface NavbarProps {
-  classes: any;
   toggle: any;
   isDark: boolean;
 }
 
 function Navbar(props: NavbarProps) {
-  // States
   const [drawerState, setDrawerState] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  // Styles
   const classes = useStyles();
   const theme = useTheme();
   const mobileWidth = useMediaQuery(theme.breakpoints.down('xs'));
 
-  // Functions
-  const openMenu = (event: React.SyntheticEvent<HTMLElement>) => {
+  const openMenu = (event: React.SyntheticEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);
   };
 
-  const toggleDrawer = (event: React.SyntheticEvent) => {
-    if (event && event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
-      return;
-    }
-
+  const toggleDrawer = (): void => {
     setDrawerState(!drawerState);
   };
 
-  // Data
   const items: SocialMenuItemProps[] = [
     { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
     { icon: LinkedIn, link: '' }
@@ -72,47 +59,55 @@ function Navbar(props: NavbarProps) {
     </IconButton>
   );
 
-  const toolBar = (
-    <AppBar position='static'>
-      <Toolbar>
-        <IconButton 
-          edge='start'
-          className={classes.menuButton}
-          color='inherit'
-          aria-label='menu'
-          onClick={toggleDrawer}>
-          <MenuIcon />
-        </IconButton>
-        <Typography
-          variant='h6'
-          className={classes.title}>
-          <Link to='/' className={classes.titleLink}>
-            Connor Wong
-          </Link>
-        </Typography>
-        {!props.isDark ? <Brightness4 /> : <BrightnessHigh />}
-        <Switch
-          checked={props.isDark}
-          onChange={props.toggle}
-        />
-        {mobileWidth ? menuButton : itemElements}
-      </Toolbar>
+  const leftSide = (
+    <>
+      <IconButton
+        edge='start'
+        className={classes.menuButton}
+        color='inherit'
+        aria-label='menu'
+        onClick={toggleDrawer}>
+        <MenuIcon />
+      </IconButton>
+      <Typography
+        variant='h6'
+        className={classes.title}>
+        <Link to='/' className={classes.titleLink}>
+          Connor Wong
+        </Link>
+      </Typography>
+    </>
+  )
+
+  const rightSide = (
+    <>
+      {!props.isDark ? <Brightness4 /> : <BrightnessHigh />}
+      <Switch
+        checked={props.isDark}
+        onChange={props.toggle}
+      />
+      {mobileWidth ? menuButton : itemElements}
       <SocialMenu
         anchorEl={anchorEl}
         setAnchorEl={setAnchorEl}
         children={itemElements}
       />
-    </AppBar>
+    </>
   )
 
   return (
-    <div className={classes.root}>
-      {toolBar}
+    <>
+      <AppBar position='static'>
+        <Toolbar>
+          {leftSide}
+          {rightSide}
+        </Toolbar>
+      </AppBar>
       <SwipeableTempDrawer
         toggleDrawer={toggleDrawer}
         show={drawerState}
       />
-    </div>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ function SocialMenu(props: SocialMenuProps) {
     <Menu
       anchorEl={props.anchorEl}
       keepMounted
-      open={Boolean(props.anchorEl)}
+      open={props.anchorEl != null}
       onClose={() => props.setAnchorEl(null)}
       children={props.children} />
   )

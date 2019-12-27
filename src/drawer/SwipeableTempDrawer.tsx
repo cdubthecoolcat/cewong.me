@@ -23,28 +23,24 @@ function SwipeableTempDrawer(props: SwipeableTempDrawerProps) {
   ]
 
   const sideList = (
-    <div
+    <List
       className={classes.list}
       role='presentation'
       onClick={e => props.toggleDrawer(false, e)}
       onKeyDown={e => props.toggleDrawer(false, e)}>
-      <List>
-        {items.map((props: ListItemLinkProps) => (
-          <ListItemLink {...props} key={props.name} />
-        ))}
-      </List>
-    </div>
+      {items.map((props: ListItemLinkProps) => (
+        <ListItemLink {...props} key={props.name} />
+      ))}
+    </List>
   );
 
   return (
-    <div>
-      <SwipeableDrawer
-        open={props.show}
-        onClose={e => props.toggleDrawer(false, e)}
-        onOpen={e => props.toggleDrawer(true, e)}>
-        {sideList}
-      </SwipeableDrawer>
-    </div>
+    <SwipeableDrawer
+      open={props.show}
+      onClose={e => props.toggleDrawer(false, e)}
+      onOpen={e => props.toggleDrawer(true, e)}>
+      {sideList}
+    </SwipeableDrawer>
   );
 }
 

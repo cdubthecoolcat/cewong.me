@@ -6,13 +6,15 @@ import { BrowserRouter } from 'react-router-dom';
 import Navbar from './navbar/Navbar';
 import Routes from './Routes';
 
-function App(props: any) {
+
+
+function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [cookies, setCookie] = useCookies(['darkMode']);
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
 
 
-  const toggleDarkMode = () => {
+  const toggleDarkMode = (): void => {
     const newDark = !darkMode;
     setDarkMode(newDark);
     setCookie('darkMode', newDark, {
@@ -45,7 +47,6 @@ function App(props: any) {
         <Navbar
           toggle={toggleDarkMode}
           isDark={darkMode}
-          {...props}
         />
         <Routes />
       </BrowserRouter>

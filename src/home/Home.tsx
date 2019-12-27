@@ -21,45 +21,38 @@ const growStyle: React.CSSProperties = {
 };
 
 function Home() {
+  document.title = 'Connor Wong';
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const classes = useStyles();
 
-  React.useEffect(() => {
-    document.title = 'Connor Wong';
-  });
-
   return (
-    <Grid item xs={12}>
-      <div className={classes.main}>
-        <div>
-          <Grow
-            in={!isLoading}
-            timeout={1000}
-            style={growStyle}> 
-            <Typography variant='h2'>
-              Welcome!
-            </Typography>
-          </Grow>
-          <Grow
-            in={!isLoading}
-            timeout={1500}
-            style={growStyle}>
-            <img
-              src={me}
-              alt='me'
-              className={classes.meImg}
-              onLoad={() => setIsLoading(false)}
-              onError={() => setIsLoading(false)}
-            />
-          </Grow>
-          <Grow
-            in={!isLoading}
-            timeout={2000}
-            style={growStyle}>
-            <About />
-          </Grow>
-        </div>
-      </div>
+    <Grid item xs={12} className={classes.main}>
+      <Grow
+        in={!isLoading}
+        timeout={1000}
+        style={growStyle}>
+        <Typography variant='h2'>
+          Welcome!
+        </Typography>
+      </Grow>
+      <Grow
+        in={!isLoading}
+        timeout={1500}
+        style={growStyle}>
+        <img
+          src={me}
+          alt='me'
+          className={classes.meImg}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
+        />
+      </Grow>
+      <Grow
+        in={!isLoading}
+        timeout={2000}
+        style={growStyle}>
+        <About />
+      </Grow>
     </Grid>
   )
 }
