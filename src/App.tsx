@@ -1,18 +1,19 @@
-import React from 'react';
-import Navbar from './navbar/Navbar';
-import { ThemeProvider, CssBaseline, createMuiTheme, useMediaQuery } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, ThemeProvider, useMediaQuery } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
+import React from 'react';
 import { useCookies } from 'react-cookie';
-import { Switch, Route } from 'react-router';
-import Projects from './projects/projects';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import Home from './home/home';
+import Navbar from './navbar/Navbar';
+import Projects from './projects/projects';
 
 function App(props: any) {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [cookies, setCookie] = useCookies(['darkMode']);
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
 
-  
+
   const toggleDarkMode = () => {
     const newDark = !darkMode;
     setDarkMode(newDark);
@@ -42,21 +43,23 @@ function App(props: any) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navbar
-        toggle={toggleDarkMode}
-        isDark={darkMode}
-        {...props}
-      />
-      <Switch>
-        <Route
-          path='/projects'
-          component={Projects}
+      <BrowserRouter>
+        <Navbar
+          toggle={toggleDarkMode}
+          isDark={darkMode}
+          {...props}
         />
-        <Route
-          path='/'
-          component={Home}
-        />
-      </Switch>
+        <Switch>
+          <Route
+            path='/projects'
+            component={Projects}
+          />
+          <Route
+            path='/'
+            component={Home}
+          />
+        </Switch>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

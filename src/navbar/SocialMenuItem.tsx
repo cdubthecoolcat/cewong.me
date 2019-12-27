@@ -1,5 +1,5 @@
+import { IconButton } from '@material-ui/core';
 import React from 'react';
-import {IconButton} from '@material-ui/core';
 
 export interface SocialMenuItemProps {
   icon: any;

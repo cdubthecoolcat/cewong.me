@@ -1,5 +1,5 @@
-import React from 'react';
 import { Menu } from '@material-ui/core';
+import React from 'react';
 
 interface SocialMenuProps {
   anchorEl: null | HTMLElement;

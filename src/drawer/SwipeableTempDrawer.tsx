@@ -1,7 +1,7 @@
-import * as styles from '@material-ui/core/styles';
-import React from 'react';
 import { List, SwipeableDrawer } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { Folder, Home } from '@material-ui/icons';
+import React from 'react';
 import ListItemLink, { ListItemLinkProps } from './ListItemLink';
 
 interface SwipeableTempDrawerProps {
@@ -10,7 +10,7 @@ interface SwipeableTempDrawerProps {
 }
 
 function SwipeableTempDrawer(props: SwipeableTempDrawerProps) {
-  const drawerStyle = styles.makeStyles({
+  const drawerStyle = makeStyles({
     list: {
       width: 250,
     },

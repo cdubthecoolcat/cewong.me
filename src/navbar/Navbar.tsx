@@ -1,14 +1,14 @@
-import React from 'react';
-import * as styles from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, Switch, useMediaQuery } from '@material-ui/core';
-import { GitHub, LinkedIn, Brightness4, BrightnessHigh, MoreVert } from '@material-ui/icons';
+import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
+import styles, { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
+import { Brightness4, BrightnessHigh, GitHub, LinkedIn, MoreVert } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
 import SocialMenu from './SocialMenu';
-import SocialMenuItem, {SocialMenuItemProps} from './SocialMenuItem';
+import SocialMenuItem, { SocialMenuItemProps } from './SocialMenuItem';
 
-const useStyles = styles.makeStyles((theme: styles.Theme) => {
-  return styles.createStyles({
+const useStyles = makeStyles((theme: styles.Theme) => {
+  return createStyles({
     root: {
       flexGrow: 1,
     },
@@ -32,7 +32,7 @@ function Navbar(props: NavbarProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const classes = useStyles();
-  const theme = styles.useTheme();
+  const theme = useTheme();
   const mobileWidth = useMediaQuery(theme.breakpoints.down('xs'));
 
   const openMenu = (event: React.SyntheticEvent<HTMLElement>) => {

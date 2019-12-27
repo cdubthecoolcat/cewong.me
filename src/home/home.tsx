@@ -1,5 +1,5 @@
+import { createStyles, Grid, Grow, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { Grow, makeStyles, createStyles, Typography, Grid } from '@material-ui/core';
 import me from './images/me.png';
 
 const useStyles = makeStyles(() => {
@@ -15,13 +15,14 @@ const useStyles = makeStyles(() => {
 });
 
 function Home() {
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const classes = useStyles();
 
   return (
     <Grid item xs={12}>
       <div className={classes.main}>
         <Grow
-          in={true}
+          in={!isLoading}
           timeout={1000}
           style={{
             transformOrigin: 'center center'
@@ -34,6 +35,7 @@ function Home() {
               src={me}
               alt='me'
               className={classes.meImg}
+              onLoad={() => setIsLoading(false)}
             />
           </div>
         </Grow>
