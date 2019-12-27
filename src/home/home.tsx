@@ -36,6 +36,7 @@ function Home() {
               alt='me'
               className={classes.meImg}
               onLoad={() => setIsLoading(false)}
+              onError={() => setIsLoading(false)}
             />
           </div>
         </Grow>
