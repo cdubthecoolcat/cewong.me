@@ -1,6 +1,5 @@
 import { Popover, IconButton } from '@material-ui/core';
 import React from 'react';
-import { useCookies } from 'react-cookie';
 
 interface CircleProps {
   color: string;
@@ -15,15 +14,11 @@ const circleStyle: React.CSSProperties = {
 }
 
 function Circle(props: CircleProps) {
-  const setCookie = useCookies(['accent'])[1];
-
   return (
     <IconButton
       onClick={() => {
         props.setAccentColor(props.color);
-        setCookie('accent', props.color, {
-          maxAge: 2592000
-        });
+        localStorage.setItem('accent', props.color);
       }}
     >
       <div 

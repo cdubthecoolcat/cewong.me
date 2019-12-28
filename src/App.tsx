@@ -1,7 +1,6 @@
 import { createMuiTheme, CssBaseline, Fade, LinearProgress, ThemeProvider, useMediaQuery } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import React from 'react';
-import { useCookies } from 'react-cookie';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar from './navbar/Navbar';
 import Routes from './Routes';
@@ -13,7 +12,6 @@ export const LoadingContext = React.createContext({
 
 function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [cookies, setCookie] = useCookies(['darkMode', 'accent']);
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
   const [accentColor, setAccentColor] = React.useState<string>(blue.A400);
   const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
@@ -21,22 +19,23 @@ function App() {
   const toggleDarkMode = (): void => {
     const newDark = !darkMode;
     setDarkMode(newDark);
-    setCookie('darkMode', newDark, {
-      maxAge: 2592000
-    });
+    localStorage.setItem('darkMode', JSON.stringify(newDark));
   }
 
   React.useEffect(() => {
-    if (cookies.darkMode !== undefined) {
-      setDarkMode(JSON.parse(cookies.darkMode));
+    const darkModeStorage = localStorage.getItem('darkMode');
+    const accentColorStorage = localStorage.getItem('accent');
+
+    if (darkModeStorage !== null) {
+      setDarkMode(JSON.parse(darkModeStorage));
     } else {
       setDarkMode(preferDarkMode);
     }
 
-    if (cookies.accent !== undefined) {
-      setAccentColor(cookies.accent)
+    if (accentColorStorage !== null) {
+      setAccentColor(accentColorStorage)
     }
-  }, [preferDarkMode, cookies]);
+  }, [preferDarkMode]);
 
   const theme = createMuiTheme({
     palette: {
