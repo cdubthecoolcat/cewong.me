@@ -21,7 +21,9 @@ function Circle(props: CircleProps) {
     <IconButton
       onClick={() => {
         props.setAccentColor(props.color);
-        setCookie('accent', props.color);
+        setCookie('accent', props.color, {
+          maxAge: 2592000
+        });
       }}
     >
       <div 

@@ -22,7 +22,7 @@ function App() {
     const newDark = !darkMode;
     setDarkMode(newDark);
     setCookie('darkMode', newDark, {
-      maxAge: 86400
+      maxAge: 2592000
     });
   }
 
