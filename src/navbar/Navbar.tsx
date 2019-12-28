@@ -64,7 +64,9 @@ function Navbar(props: NavbarProps) {
   ));
 
   const menuButton = (
-    <IconButton onClick={openMenu} color='inherit'>
+    <IconButton
+      onClick={openMenu}
+      color='inherit'>
       <MoreVert />
     </IconButton>
   );
@@ -82,7 +84,9 @@ function Navbar(props: NavbarProps) {
       <Typography
         variant='h6'
         className={classes.title}>
-        <Link to='/' className={classes.titleLink}>
+        <Link
+          to='/'
+          className={classes.titleLink}>
           Connor Wong
         </Link>
       </Typography>

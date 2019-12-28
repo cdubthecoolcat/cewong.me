@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => {
   return createStyles({
     main: {
       textAlign: 'center',
-      marginTop: 100
+      marginTop: 75
     },
     meImg: {
       margin: 50,
@@ -28,12 +28,15 @@ function Home() {
   return (
     <LoadingContext.Consumer>
       {({ loaded, setLoaded }) => (
-        <Grid item xs={12} className={classes.main}>
+        <Grid
+          item
+          xs={12}
+          className={classes.main}>
           <Grow
             in={loaded}
             timeout={1000}
             style={growStyle}>
-            <Typography variant='h2'>
+            <Typography variant='h3'>
               Welcome!
             </Typography>
           </Grow>

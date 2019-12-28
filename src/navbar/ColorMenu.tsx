@@ -54,7 +54,11 @@ function ColorMenu(props: ColorMenuProps) {
       open={props.anchorEl != null}
       onClose={() => props.setAnchorEl(null)}>
       {props.colors.map((color: string, index: number) => (
-        <Circle color={color} key={index} setAccentColor={props.setAccentColor} />
+        <Circle
+          color={color}
+          key={index}
+          setAccentColor={props.setAccentColor}
+        />
       ))}
     </Popover>
   )

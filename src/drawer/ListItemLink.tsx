@@ -11,7 +11,10 @@ export interface ListItemLinkProps {
 function ListItemLink(props: ListItemLinkProps) {
   const Icon = props.icon;
   return (
-    <ListItem button component={Link} to={props.link}>
+    <ListItem
+      button
+      component={Link}
+      to={props.link}>
       {props.icon ?
         <ListItemIcon>
           <Icon />
