@@ -1,14 +1,14 @@
-import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery, Menu, Input } from '@material-ui/core';
+import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
+import { blue, deepPurple, pink, teal } from '@material-ui/core/colors';
 import styles, { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Brightness4, BrightnessHigh, GitHub, LinkedIn, MoreVert, Palette } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
+import ColorMenu from './ColorMenu';
 import SocialMenu from './SocialMenu';
 import SocialMenuItem, { SocialMenuItemProps } from './SocialMenuItem';
-import ColorMenu from './ColorMenu';
-import { blue, pink, deepPurple, teal } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme: styles.Theme) => {
   return createStyles({

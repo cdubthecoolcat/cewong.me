@@ -1,4 +1,4 @@
-import { createMuiTheme, CssBaseline, ThemeProvider, useMediaQuery, LinearProgress, Fade } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, Fade, LinearProgress, ThemeProvider, useMediaQuery } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import React from 'react';
 import { useCookies } from 'react-cookie';
@@ -10,8 +10,6 @@ export const LoadingContext = React.createContext({
   loaded: false,
   setLoaded: () => {}
 });
-
-const hexRegExp = RegExp(/^#(([\da-fA-F]{3}){1,2}|([\da-fA-F]{4}){1,2})$/);
 
 function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');

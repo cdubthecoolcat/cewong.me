@@ -15,7 +15,7 @@ const circleStyle: React.CSSProperties = {
 }
 
 function Circle(props: CircleProps) {
-  const [cookies, setCookie] = useCookies(['accent']);
+  const setCookie = useCookies(['accent'])[1];
 
   return (
     <IconButton
