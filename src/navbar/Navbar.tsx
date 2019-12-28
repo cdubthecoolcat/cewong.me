@@ -1,12 +1,14 @@
-import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
+import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery, Menu, Input } from '@material-ui/core';
 import styles, { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Brightness4, BrightnessHigh, GitHub, LinkedIn, MoreVert } from '@material-ui/icons';
+import { Brightness4, BrightnessHigh, GitHub, LinkedIn, MoreVert, Palette } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
 import SocialMenu from './SocialMenu';
 import SocialMenuItem, { SocialMenuItemProps } from './SocialMenuItem';
+import ColorMenu from './ColorMenu';
+import { blue, pink, deepPurple, teal } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme: styles.Theme) => {
   return createStyles({
@@ -26,19 +28,27 @@ const useStyles = makeStyles((theme: styles.Theme) => {
 interface NavbarProps {
   toggle: any;
   isDark: boolean;
+  setAccentColor: Function;
 }
+
+const colors = [blue.A400, pink.A400, deepPurple.A400, teal.A400]
 
 function Navbar(props: NavbarProps) {
   const [drawerState, setDrawerState] = React.useState<boolean>(false);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [colorPickerAnchor, setColorPickerAnchor] = React.useState<null | HTMLElement>(null);
+  const [socialMenuAnchor, setSocialMenuAnchor] = React.useState<null | HTMLElement>(null);
 
   const classes = useStyles();
   const theme = useTheme();
   const mobileWidth = useMediaQuery(theme.breakpoints.down('xs'));
 
   const openMenu = (event: React.SyntheticEvent<HTMLElement>): void => {
-    setAnchorEl(event.currentTarget);
+    setSocialMenuAnchor(event.currentTarget);
   };
+
+  const openColorMenu = (event: React.SyntheticEvent<HTMLElement>): void => {
+    setColorPickerAnchor(event.currentTarget);
+  }
 
   const toggleDrawer = (): void => {
     setDrawerState(!drawerState);
@@ -81,6 +91,16 @@ function Navbar(props: NavbarProps) {
 
   const rightSide = (
     <>
+      <IconButton
+        color='inherit'
+        onClick={openColorMenu}>
+        <Palette />
+      </IconButton>
+      <ColorMenu
+        colors={colors}
+        anchorEl={colorPickerAnchor}
+        setAnchorEl={setColorPickerAnchor} 
+        setAccentColor={props.setAccentColor} />
       {!props.isDark ? <Brightness4 /> : <BrightnessHigh />}
       <Switch
         checked={props.isDark}
@@ -88,8 +108,8 @@ function Navbar(props: NavbarProps) {
       />
       {mobileWidth ? menuButton : itemElements}
       <SocialMenu
-        anchorEl={anchorEl}
-        setAnchorEl={setAnchorEl}
+        anchorEl={socialMenuAnchor}
+        setAnchorEl={setSocialMenuAnchor}
         children={itemElements}
       />
     </>

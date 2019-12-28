@@ -11,10 +11,13 @@ export const LoadingContext = React.createContext({
   setLoaded: () => {}
 });
 
+const hexRegExp = RegExp(/^#(([\da-fA-F]{3}){1,2}|([\da-fA-F]{4}){1,2})$/);
+
 function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [cookies, setCookie] = useCookies(['darkMode']);
+  const [cookies, setCookie] = useCookies(['darkMode', 'accent']);
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
+  const [accentColor, setAccentColor] = React.useState<string>(blue.A400);
   const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
 
   const toggleDarkMode = (): void => {
@@ -31,6 +34,10 @@ function App() {
     } else {
       setDarkMode(preferDarkMode);
     }
+
+    if (cookies.accent !== undefined) {
+      setAccentColor(cookies.accent)
+    }
   }, [preferDarkMode, cookies]);
 
   const theme = createMuiTheme({
@@ -38,7 +45,9 @@ function App() {
       primary: {
         main: '#212121',
       },
-      secondary: blue,
+      secondary: {
+        main: accentColor
+      },
       type: darkMode ? 'dark' : 'light',
     },
   });
@@ -50,6 +59,7 @@ function App() {
         <Navbar
           toggle={toggleDarkMode}
           isDark={darkMode}
+          setAccentColor={setAccentColor}
         />
         <Fade
           in={!isLoaded}
