@@ -1,4 +1,4 @@
-import { createMuiTheme, CssBaseline, ThemeProvider, useMediaQuery } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, ThemeProvider, useMediaQuery, LinearProgress, Fade } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import React from 'react';
 import { useCookies } from 'react-cookie';
@@ -6,13 +6,16 @@ import { BrowserRouter } from 'react-router-dom';
 import Navbar from './navbar/Navbar';
 import Routes from './Routes';
 
-
+export const LoadingContext = React.createContext({
+  loaded: false,
+  setLoaded: () => {}
+});
 
 function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [cookies, setCookie] = useCookies(['darkMode']);
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
-
+  const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
 
   const toggleDarkMode = (): void => {
     const newDark = !darkMode;
@@ -48,7 +51,18 @@ function App() {
           toggle={toggleDarkMode}
           isDark={darkMode}
         />
-        <Routes />
+        <Fade
+          in={!isLoaded}
+          timeout={1000}>
+          <LinearProgress color="secondary" />
+        </Fade>
+        <LoadingContext.Provider
+          value={{
+            loaded: isLoaded,
+            setLoaded: () => setIsLoaded(true)
+          }}>
+          <Routes />
+        </LoadingContext.Provider>
       </BrowserRouter>
     </ThemeProvider>
   );

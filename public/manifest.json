@@ -1,6 +1,9 @@
 {
   "short_name": "Connor Wong",
-  "name": "My Website",
+  "name": "Connor Wong",
+  "description": "My portfolio website",
+  "theme_color": "#303030",
+  "background_color": "#ffffff",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,7 +12,5 @@
     }
   ],
   "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "display": "standalone"
 }
