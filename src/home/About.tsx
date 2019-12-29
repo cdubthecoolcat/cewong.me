@@ -1,11 +1,15 @@
-import { GrowProps, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
-function About(props: GrowProps) {
+interface AboutProps {
+  style?: React.CSSProperties;
+}
+
+function About(props: AboutProps) {
   return (
     <Typography
       variant='h6'
-      {...props}>
+      style={props.style}>
       Hi! I'm a programmer who's always <br/>
       trying to learn something new.
     </Typography>
