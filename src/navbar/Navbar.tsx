@@ -1,14 +1,13 @@
 import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
 import { blue, deepPurple, pink, teal } from '@material-ui/core/colors';
 import styles, { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Brightness4, BrightnessHigh, GitHub, LinkedIn, MoreVert, Palette } from '@material-ui/icons';
+import { Brightness4, BrightnessHigh, Palette } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
 import ColorMenu from './ColorMenu';
 import SocialMenu from './SocialMenu';
-import SocialMenuItem, { SocialMenuItemProps } from './SocialMenuItem';
 
 const useStyles = makeStyles((theme: styles.Theme) => {
   return createStyles({
@@ -25,13 +24,13 @@ const useStyles = makeStyles((theme: styles.Theme) => {
   });
 });
 
+const colors = [blue.A400, pink.A400, deepPurple.A400, teal.A400]
+
 interface NavbarProps {
   toggle: any;
   isDark: boolean;
   setAccentColor: Function;
 }
-
-const colors = [blue.A400, pink.A400, deepPurple.A400, teal.A400]
 
 function Navbar(props: NavbarProps) {
   const [drawerState, setDrawerState] = React.useState<boolean>(false);
@@ -42,7 +41,7 @@ function Navbar(props: NavbarProps) {
   const theme = useTheme();
   const mobileWidth = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const openMenu = (event: React.SyntheticEvent<HTMLElement>): void => {
+  const openSocialMenu = (event: React.SyntheticEvent<HTMLElement>): void => {
     setSocialMenuAnchor(event.currentTarget);
   };
 
@@ -53,23 +52,6 @@ function Navbar(props: NavbarProps) {
   const toggleDrawer = (): void => {
     setDrawerState(!drawerState);
   };
-
-  const items: SocialMenuItemProps[] = [
-    { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
-    { icon: LinkedIn, link: '' }
-  ];
-
-  const itemElements = items.map((props: SocialMenuItemProps, index: number) => (
-    <SocialMenuItem {...props} key={index} />
-  ));
-
-  const menuButton = (
-    <IconButton
-      onClick={openMenu}
-      color='inherit'>
-      <MoreVert />
-    </IconButton>
-  );
 
   const leftSide = (
     <>
@@ -103,18 +85,19 @@ function Navbar(props: NavbarProps) {
       <ColorMenu
         colors={colors}
         anchorEl={colorPickerAnchor}
-        setAnchorEl={setColorPickerAnchor} 
-        setAccentColor={props.setAccentColor} />
+        setAnchorEl={setColorPickerAnchor}
+        setAccentColor={props.setAccentColor}
+      />
       {!props.isDark ? <Brightness4 /> : <BrightnessHigh />}
       <Switch
         checked={props.isDark}
         onChange={props.toggle}
       />
-      {mobileWidth ? menuButton : itemElements}
       <SocialMenu
         anchorEl={socialMenuAnchor}
         setAnchorEl={setSocialMenuAnchor}
-        children={itemElements}
+        mobile={mobileWidth}
+        openMenu={openSocialMenu}
       />
     </>
   )

@@ -1,8 +1,8 @@
 import { createStyles, Grid, Grow, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { LoadingContext } from '../App';
 import About from './About';
 import me from './images/me.png';
-import { LoadingContext } from '../App';
 
 const useStyles = makeStyles(() => {
   return createStyles({

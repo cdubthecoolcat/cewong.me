@@ -1,4 +1,4 @@
-import { Popover, IconButton } from '@material-ui/core';
+import { IconButton, Popover } from '@material-ui/core';
 import React from 'react';
 
 interface CircleProps {
@@ -19,8 +19,7 @@ function Circle(props: CircleProps) {
       onClick={() => {
         props.setAccentColor(props.color);
         localStorage.setItem('accent', props.color);
-      }}
-    >
+      }}>
       <div 
         style={{...circleStyle, backgroundColor: props.color}} />
     </IconButton>

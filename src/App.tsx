@@ -10,6 +10,14 @@ export const LoadingContext = React.createContext({
   setLoaded: () => {}
 });
 
+const booleanStrings: Set<string> = new Set<string>(['true', 'false'])
+
+function isColor(color: string): boolean {
+  let s = new Option().style;
+  s.color = color;
+  return s.color !== '';
+}
+
 function App() {
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
@@ -26,13 +34,13 @@ function App() {
     const darkModeStorage = localStorage.getItem('darkMode');
     const accentColorStorage = localStorage.getItem('accent');
 
-    if (darkModeStorage !== null) {
+    if (darkModeStorage !== null && booleanStrings.has(darkModeStorage)) {
       setDarkMode(JSON.parse(darkModeStorage));
     } else {
       setDarkMode(preferDarkMode);
     }
 
-    if (accentColorStorage !== null) {
+    if (accentColorStorage !== null && isColor(accentColorStorage)) {
       setAccentColor(accentColorStorage)
     }
   }, [preferDarkMode]);
