@@ -1,23 +1,22 @@
-import { Menu, IconButton } from '@material-ui/core';
-import React from 'react';
+import { IconButton, Popover } from '@material-ui/core';
 import { GitHub, LinkedIn, MoreVert } from '@material-ui/icons';
+import React from 'react';
 
 interface SocialMenuItemProps {
   icon: any;
   link: string;
 }
 
-export const SocialMenuItem = React.forwardRef((props: SocialMenuItemProps, ref: React.Ref<HTMLAnchorElement>) => {
+function SocialMenuItem(props: SocialMenuItemProps) {
   const Icon = props.icon;
   return (
     <IconButton
       href={props.link}
-      color='inherit'
-      ref={ref}>
+      color='inherit'>
       <Icon />
     </IconButton>
   )
-});
+}
 
 const menuItems: SocialMenuItemProps[] = [
   { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
@@ -32,7 +31,7 @@ interface SocialMenuProps {
   anchorEl: null | HTMLElement;
   setAnchorEl: Function;
   mobile: boolean;
-  openMenu: any;
+  openMenu: (event: React.SyntheticEvent<HTMLElement, Event>) => void;
 }
 
 function SocialMenu(props: SocialMenuProps) {
@@ -49,7 +48,7 @@ function SocialMenu(props: SocialMenuProps) {
       {props.mobile ?
         <>
           {menuButton}
-          <Menu
+          <Popover
             anchorEl={props.anchorEl}
             keepMounted
             open={props.anchorEl != null}
