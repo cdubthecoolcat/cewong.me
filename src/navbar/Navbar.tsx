@@ -1,5 +1,4 @@
 import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
-import { blue, deepPurple, pink, teal } from '@material-ui/core/colors';
 import styles, { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Brightness4, BrightnessHigh, Palette } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -23,8 +22,6 @@ const useStyles = makeStyles((theme: styles.Theme) => {
     }
   });
 });
-
-const colors = [blue.A400, pink.A400, deepPurple.A400, teal.A400]
 
 interface NavbarProps {
   toggle: any;
@@ -83,7 +80,6 @@ function Navbar(props: NavbarProps) {
         <Palette />
       </IconButton>
       <ColorMenu
-        colors={colors}
         anchorEl={colorPickerAnchor}
         setAnchorEl={setColorPickerAnchor}
         setAccentColor={props.setAccentColor}

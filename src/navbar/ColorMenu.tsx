@@ -1,5 +1,13 @@
 import { IconButton, Popover } from '@material-ui/core';
+import { blue, deepPurple, pink, teal } from '@material-ui/core/colors';
 import React from 'react';
+
+const colors = [
+  blue.A400,
+  pink.A400,
+  deepPurple.A400,
+  teal.A400
+]
 
 interface CircleProps {
   color: string;
@@ -20,14 +28,13 @@ function Circle(props: CircleProps) {
         props.setAccentColor(props.color);
         localStorage.setItem('accent', props.color);
       }}>
-      <div 
+      <div
         style={{...circleStyle, backgroundColor: props.color}} />
     </IconButton>
   )
 }
 
 interface ColorMenuProps {
-  colors: string[];
   anchorEl: null | HTMLElement;
   setAnchorEl: Function;
   setAccentColor: Function;
@@ -47,12 +54,18 @@ function ColorMenu(props: ColorMenuProps) {
       anchorEl={props.anchorEl}
       open={props.anchorEl != null}
       onClose={() => props.setAnchorEl(null)}>
-      {props.colors.map((color: string, index: number) => (
-        <Circle
-          color={color}
-          key={index}
-          setAccentColor={props.setAccentColor}
-        />
+      {colors.map((color: string, index: number) => (
+        <>
+          <Circle
+            color={color}
+            key={index}
+            setAccentColor={props.setAccentColor}
+          />
+          {(index % Math.floor(colors.length / 2) === Math.floor(colors.length / 2 - 1)) ?
+            <br/> :
+            null
+          }
+        </>
       ))}
     </Popover>
   )
