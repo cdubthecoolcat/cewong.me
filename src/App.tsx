@@ -10,7 +10,9 @@ export const LoadingContext = React.createContext({
   setLoaded: () => {}
 });
 
-const booleanStrings: Set<string> = new Set<string>(['true', 'false'])
+const booleanStrings = new Set<string>(['true', 'false'])
+
+const needsLoad = new Set<string>(['/']);
 
 function isColor(color: string): boolean {
   let s = new Option().style;
@@ -42,6 +44,10 @@ function App() {
 
     if (accentColorStorage !== null && isColor(accentColorStorage)) {
       setAccentColor(accentColorStorage)
+    }
+
+    if (!needsLoad.has(window.location.pathname)) {
+      setIsLoaded(true);
     }
   }, [preferDarkMode]);
 
