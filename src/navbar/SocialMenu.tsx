@@ -1,5 +1,5 @@
 import { IconButton, Popover } from '@material-ui/core';
-import { GitHub, LinkedIn, MoreVert } from '@material-ui/icons';
+import { GitHub, LinkedIn, Mail, MoreVert } from '@material-ui/icons';
 import React from 'react';
 
 interface SocialMenuItemProps {
@@ -20,7 +20,8 @@ function SocialMenuItem(props: SocialMenuItemProps) {
 
 const menuItems: SocialMenuItemProps[] = [
   { icon: GitHub, link: 'https://github.com/cdubthecoolcat' },
-  { icon: LinkedIn, link: '' }
+  { icon: Mail, link: 'mailto:contact@cewong.me' },
+  { icon: LinkedIn, link: 'https://www.linkedin.com/in/connor-wong-0a4199169/' }
 ];
 
 const menuItemElements = menuItems.map((props: SocialMenuItemProps, index: number) => (

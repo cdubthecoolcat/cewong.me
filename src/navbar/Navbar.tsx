@@ -1,14 +1,14 @@
 import { AppBar, IconButton, Switch, Toolbar, Typography, useMediaQuery } from '@material-ui/core';
-import styles, { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import { Brightness4, BrightnessHigh, Palette } from '@material-ui/icons';
-import MenuIcon from '@material-ui/icons/Menu';
+//import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableTempDrawer from '../drawer/SwipeableTempDrawer';
 import ColorMenu from './ColorMenu';
 import SocialMenu from './SocialMenu';
 
-const useStyles = makeStyles((theme: styles.Theme) => {
+const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     menuButton: {
       marginRight: theme.spacing(2),
@@ -52,14 +52,14 @@ function Navbar(props: NavbarProps) {
 
   const leftSide = (
     <>
-      <IconButton
+{/*     <IconButton
         edge='start'
         className={classes.menuButton}
         color='inherit'
         aria-label='menu'
         onClick={toggleDrawer}>
         <MenuIcon />
-      </IconButton>
+        </IconButton> */}
       <Typography
         variant='h6'
         className={classes.title}>
